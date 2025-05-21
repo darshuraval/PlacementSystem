@@ -1,0 +1,191 @@
+﻿@model IEnumerable<PlacementSystem.Models.CampusDriveNotification>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferenceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectionProcess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stipend)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TraineeType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBond)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BondDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfJoining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Batch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EligibleCourses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptCoordinatorNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptCoordinatorEmails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TPOCoordinatorNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TPOCoordinatorEmails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherInformation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttachmentURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SelectionProcess)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CTC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stipend)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TraineeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBond)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BondDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobProfile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfJoining)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Batch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EligibleCourses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptCoordinatorNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptCoordinatorEmails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TPOCoordinatorNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TPOCoordinatorEmails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyProfile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherInformation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AttachmentURL)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,164 @@
+﻿@model PlacementSystem.Models.CampusDriveNotification
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CampusDriveNotification</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId"></select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReferenceNumber" class="control-label"></label>
+                <input asp-for="ReferenceNumber" class="form-control" />
+                <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobLocation" class="control-label"></label>
+                <input asp-for="JobLocation" class="form-control" />
+                <span asp-validation-for="JobLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyURL" class="control-label"></label>
+                <input asp-for="CompanyURL" class="form-control" />
+                <span asp-validation-for="CompanyURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectionProcess" class="control-label"></label>
+                <input asp-for="SelectionProcess" class="form-control" />
+                <span asp-validation-for="SelectionProcess" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CTC" class="control-label"></label>
+                <input asp-for="CTC" class="form-control" />
+                <span asp-validation-for="CTC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stipend" class="control-label"></label>
+                <input asp-for="Stipend" class="form-control" />
+                <span asp-validation-for="Stipend" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TraineeType" class="control-label"></label>
+                <input asp-for="TraineeType" class="form-control" />
+                <span asp-validation-for="TraineeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsBond" class="control-label"></label>
+                <input asp-for="IsBond" class="form-control" />
+                <span asp-validation-for="IsBond" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BondDetails" class="control-label"></label>
+                <input asp-for="BondDetails" class="form-control" />
+                <span asp-validation-for="BondDetails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobProfile" class="control-label"></label>
+                <input asp-for="JobProfile" class="form-control" />
+                <span asp-validation-for="JobProfile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfJoining" class="control-label"></label>
+                <input asp-for="DateOfJoining" class="form-control" />
+                <span asp-validation-for="DateOfJoining" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch" class="control-label"></label>
+                <input asp-for="Batch" class="form-control" />
+                <span asp-validation-for="Batch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EligibleCourses" class="control-label"></label>
+                <input asp-for="EligibleCourses" class="form-control" />
+                <span asp-validation-for="EligibleCourses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationDeadline" class="control-label"></label>
+                <input asp-for="RegistrationDeadline" class="form-control" />
+                <span asp-validation-for="RegistrationDeadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptCoordinatorNames" class="control-label"></label>
+                <input asp-for="DeptCoordinatorNames" class="form-control" />
+                <span asp-validation-for="DeptCoordinatorNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptCoordinatorEmails" class="control-label"></label>
+                <input asp-for="DeptCoordinatorEmails" class="form-control" />
+                <span asp-validation-for="DeptCoordinatorEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TPOCoordinatorNames" class="control-label"></label>
+                <input asp-for="TPOCoordinatorNames" class="form-control" />
+                <span asp-validation-for="TPOCoordinatorNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TPOCoordinatorEmails" class="control-label"></label>
+                <input asp-for="TPOCoordinatorEmails" class="form-control" />
+                <span asp-validation-for="TPOCoordinatorEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venue" class="control-label"></label>
+                <input asp-for="Venue" class="form-control" />
+                <span asp-validation-for="Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAndTime" class="control-label"></label>
+                <input asp-for="DateAndTime" class="form-control" />
+                <span asp-validation-for="DateAndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationLink" class="control-label"></label>
+                <input asp-for="RegistrationLink" class="form-control" />
+                <span asp-validation-for="RegistrationLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyProfile" class="control-label"></label>
+                <input asp-for="CompanyProfile" class="form-control" />
+                <span asp-validation-for="CompanyProfile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherInformation" class="control-label"></label>
+                <input asp-for="OtherInformation" class="form-control" />
+                <span asp-validation-for="OtherInformation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AttachmentURL" class="control-label"></label>
+                <input asp-for="AttachmentURL" class="form-control" />
+                <span asp-validation-for="AttachmentURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

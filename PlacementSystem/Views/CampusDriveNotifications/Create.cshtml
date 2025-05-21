@@ -1,0 +1,532 @@
+﻿@model PlacementSystem.Models.CampusDriveNotification
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CampusDriveNotification</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CompanyId" class="control-label"></label>
+                <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.CompanyId" id="CompanyId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReferenceNumber" class="control-label"></label>
+                <input asp-for="ReferenceNumber" class="form-control" value="RKU/SOE/2025/CN/0000/00    " />
+                <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <select asp-for="CompanyName" class="form-control" asp-items="ViewBag.CompanyName" id="CompanyName"></select>
+                @* <input asp-for="CompanyName" class="form-control" /> *@
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobLocation" class="control-label"></label>
+                <input asp-for="JobLocation" class="form-control" />
+                <span asp-validation-for="JobLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyURL" class="control-label"></label>
+                <input asp-for="CompanyURL" class="form-control" id="CompanyURL" />
+                <span asp-validation-for="CompanyURL" class="text-danger"></span>
+            </div>
+            @* selectionProcess *@
+            <label asp-for="SelectionProcess" class="control-label"></label>
+            <input asp-for="SelectionProcess" id="selectionProcessInput" class="form-control" />
+
+            <span asp-validation-for="SelectionProcess" class="text-danger"></span>
+
+            <div class="form-group">
+                <label asp-for="CTC" class="control-label"></label>
+                <input asp-for="CTC" class="form-control" />
+                <span asp-validation-for="CTC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Stipend" class="control-label"></label>
+                <input asp-for="Stipend" class="form-control" />
+                <span asp-validation-for="Stipend" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TraineeType" class="control-label"></label>
+                <input asp-for="TraineeType" class="form-control" />
+                <span asp-validation-for="TraineeType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsBond" class="control-label"></label>
+                <input type="checkbox" id="IsBondCheckbox" />
+                <input type="hidden" asp-for="IsBond" id="IsBondHidden" value="false" />
+                <span asp-validation-for="IsBond" class="text-danger"></span>
+            </div>
+
+            <!-- Dropdown shown when IsBond is false -->
+            <div class="form-group" id="bondDetailsDropdownGroup" style="display:block;">
+                <label asp-for="BondDetails" class="control-label"></label>
+                <select asp-for="BondDetails" class="form-control" id="BondDetailsDropdown">
+                    <option value="">-- Select --</option>
+                    <option value="No Bond">No Bond</option>
+                    <option value="Not Disclosed Yet">Not Disclosed Yet</option>
+                </select>
+                <span asp-validation-for="BondDetails" class="text-danger"></span>
+            </div>
+
+            <!-- Textbox shown when IsBond is true -->
+            <div class="form-group" id="bondDetailsTextboxGroup" style="display:none;">
+                <label asp-for="BondDetails" class="control-label"></label>
+                <input asp-for="BondDetails" class="form-control" id="BondDetailsTextbox" />
+                <span asp-validation-for="BondDetails" class="text-danger"></span>
+            </div>
+
+            <script>
+                const checkbox = document.getElementById('IsBondCheckbox');
+                const hiddenInput = document.getElementById('IsBondHidden');
+
+                const dropdownGroup = document.getElementById('bondDetailsDropdownGroup');
+                const dropdown = document.getElementById('BondDetailsDropdown');
+
+                const textboxGroup = document.getElementById('bondDetailsTextboxGroup');
+                const textbox = document.getElementById('BondDetailsTextbox');
+
+                function toggleBondDetails() {
+                    if (checkbox.checked) {
+                        hiddenInput.value = "true";
+
+                        // Show textbox, hide dropdown
+                        textboxGroup.style.display = 'block';
+                        dropdownGroup.style.display = 'none';
+
+                        // Clear dropdown value
+                        dropdown.value = "";
+                    } else {
+                        hiddenInput.value = "false";
+
+                        // Show dropdown, hide textbox
+                        dropdownGroup.style.display = 'block';
+                        textboxGroup.style.display = 'none';
+
+                        // Clear textbox value
+                        textbox.value = "";
+                    }
+                }
+
+                checkbox.addEventListener('change', toggleBondDetails);
+
+                // Initialize on page load
+                window.onload = function () {
+                    checkbox.checked = hiddenInput.value.toLowerCase() === "true";
+                    toggleBondDetails();
+                }
+            </script>
+
+            <div class="form-group">
+                <label asp-for="JobProfile" class="control-label"></label>
+                <input asp-for="JobProfile" class="form-control" />
+                <span asp-validation-for="JobProfile" class="text-danger"></span>
+            </div>
+            <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+            <div class="form-group">
+                <label asp-for="DateOfJoining" class="control-label"></label>
+                <input asp-for="DateOfJoining" class="form-control" />
+                <span asp-validation-for="DateOfJoining" class="text-danger"></span>
+            </div>
+            <!-- Include Tagify CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@yaireo/tagify/dist/tagify.css" />
+            
+            <label asp-for="Batch" class="control-label"></label>
+            <input asp-for="Batch" id="batchInput" class="form-control" />
+
+            <span asp-validation-for="Batch" class="text-danger"></span>
+            <!-- Your input field -->
+            <label asp-for="EligibleCourses" class="control-label"></label>
+            <input asp-for="EligibleCourses" id="eligibleCoursesInput" class="form-control" />
+
+            <span asp-validation-for="EligibleCourses" class="text-danger"></span>
+
+            <div class="form-group">
+                <label asp-for="RegistrationDeadline" class="control-label"></label>
+                <input asp-for="RegistrationDeadline" class="form-control" />
+                <span asp-validation-for="RegistrationDeadline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptCoordinatorNames" class="control-label"></label>
+                <input asp-for="DeptCoordinatorNames" id="DeptCoordinatorNames" class="form-control" />
+                <span asp-validation-for="DeptCoordinatorNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeptCoordinatorEmails" class="control-label"></label>
+                <input asp-for="DeptCoordinatorEmails" id="DeptCoordinatorEmails" class="form-control" readonly />
+                <span asp-validation-for="DeptCoordinatorEmails" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TPOCoordinatorNames" class="control-label"></label>
+                <input asp-for="TPOCoordinatorNames" id="TPOCoordinatorNames" class="form-control" />
+                <span asp-validation-for="TPOCoordinatorNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TPOCoordinatorEmails" class="control-label"></label>
+                <input asp-for="TPOCoordinatorEmails" id="TPOCoordinatorEmails" class="form-control" readonly />
+                <span asp-validation-for="TPOCoordinatorEmails" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Venue" class="control-label"></label>
+                <input asp-for="Venue" class="form-control" />
+                <span asp-validation-for="Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAndTime" class="control-label"></label>
+                <input asp-for="DateAndTime" class="form-control" />
+                <span asp-validation-for="DateAndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Note" class="control-label"></label>
+                <input asp-for="Note" class="form-control" />
+                <span asp-validation-for="Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegistrationLink" class="control-label"></label>
+                <input asp-for="RegistrationLink" class="form-control" />
+                <span asp-validation-for="RegistrationLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyProfile" class="control-label"></label>
+                <input asp-for="CompanyProfile" class="form-control" id="CompanyProfile" />
+                <span asp-validation-for="CompanyProfile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherInformation" class="control-label"></label>
+                <input asp-for="OtherInformation" class="form-control" />
+                <span asp-validation-for="OtherInformation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AttachmentURL" class="control-label"></label>
+                <input asp-for="AttachmentURL" class="form-control" />
+                <span asp-validation-for="AttachmentURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <script>
+        const companies = @Html.Raw(ViewBag.CompaniesJson);
+
+        function updateCompanyFields(companyId) {
+            const match = companies.find(c => c.Id == companyId);
+            if (match) {
+                document.getElementById("CompanyName").value = match.Id;
+                document.getElementById("CompanyURL").value = match.CompanyURL || '';
+                document.getElementById("CompanyProfile").value = match.CompanyProfile || '';
+            }
+        }
+
+        document.getElementById("CompanyId").addEventListener("change", function () {
+            updateCompanyFields(this.value);
+        });
+
+        document.getElementById("CompanyName").addEventListener("change", function () {
+            updateCompanyFields(this.value);
+        });
+    </script>
+    <script>
+                const dropdown = document.getElementById('selectionProcessDropdown');
+        const hiddenInput = document.getElementById('selectionProcessHidden');
+        const container = document.getElementById('selectedProcessesContainer');
+
+        let selectedProcesses = [];
+
+        function updateHiddenInput() {
+            hiddenInput.value = selectedProcesses.join(', ');
+        }
+
+        function renderTags() {
+            container.innerHTML = '';
+            selectedProcesses.forEach((process) => {
+                const tag = document.createElement('span');
+                tag.textContent = process;
+                tag.className = 'tag';
+                        tag.style.cssText = `
+    display: flex;
+    align-items: center;
+    background: #007bff;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 12px;
+    cursor: grab;
+    user-select: none;
+    max-width: 48%;
+    box-sizing: border-box;
+`;
+
+
+
+                // Remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = '×';
+                removeBtn.style.cssText = `
+                    margin-left: 8px;
+                    background: none;
+                    border: none;
+                    color: #fff;
+                    cursor: pointer;
+                    font-weight: bold;
+                `;
+                removeBtn.style.marginLeft = '10px';
+
+                removeBtn.onclick = () => {
+                    selectedProcesses = selectedProcesses.filter(p => p !== process);
+                    updateHiddenInput();
+                    renderTags();
+                };
+
+                tag.appendChild(removeBtn);
+                container.appendChild(tag);
+            });
+            updateHiddenInput();
+        }
+
+        // Add new selected process
+        dropdown.addEventListener('change', function () {
+            const val = this.value;
+            if (val && !selectedProcesses.includes(val)) {
+                selectedProcesses.push(val);
+                renderTags();
+            }
+            this.value = '';
+        });
+
+        // Initialize from hidden input on page load (if any)
+        window.onload = function () {
+            if (hiddenInput.value) {
+                selectedProcesses = hiddenInput.value.split(',').map(x => x.trim());
+                renderTags();
+            }
+        };
+
+        // Initialize SortableJS for drag-and-drop reorder
+        new Sortable(container, {
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            onEnd: function (evt) {
+                // Rebuild selectedProcesses array in new order
+                const newOrder = [];
+                container.querySelectorAll('span.tag').forEach(tag => {
+                    // textContent contains process + ×, so remove the last character (×)
+                    const text = tag.textContent.slice(0, -1).trim();
+                    newOrder.push(text);
+                });
+                selectedProcesses = newOrder;
+                updateHiddenInput();
+            }
+        });
+
+                function renderTags() {
+            container.innerHTML = '';
+            selectedProcesses.forEach((process, index) => {
+                const tag = document.createElement('span');
+                tag.textContent = process;
+                tag.style.cssText = 'display:inline-block; background:#007bff; color:#fff; padding:3px 8px; margin:2px; border-radius:12px; cursor: default;';
+
+                // Move Up button
+                const upBtn = document.createElement('button');
+                upBtn.textContent = '↑';
+                upBtn.style.cssText = 'margin-left:5px; background:none; border:none; color:#fff; cursor:pointer;';
+                upBtn.disabled = (index === 0); // disable first item up button
+                upBtn.onclick = function () {
+                    if (index > 0) {
+                        [selectedProcesses[index - 1], selectedProcesses[index]] = [selectedProcesses[index], selectedProcesses[index - 1]];
+                        updateHiddenInput();
+                        renderTags();
+                    }
+                };
+
+                // Move Down button
+                const downBtn = document.createElement('button');
+                downBtn.textContent = '↓';
+                downBtn.style.cssText = 'margin-left:2px; background:none; border:none; color:#fff; cursor:pointer;';
+                downBtn.disabled = (index === selectedProcesses.length - 1); // disable last item down button
+                downBtn.onclick = function () {
+                    if (index < selectedProcesses.length - 1) {
+                        [selectedProcesses[index + 1], selectedProcesses[index]] = [selectedProcesses[index], selectedProcesses[index + 1]];
+                        updateHiddenInput();
+                        renderTags();
+                    }
+                };
+
+                // Remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'x';
+                removeBtn.style.cssText = 'margin-left:8px; background:none; border:none; color:#fff; cursor:pointer; font-weight:bold;';
+                removeBtn.onclick = function () {
+                    selectedProcesses.splice(index, 1);
+                    updateHiddenInput();
+                    renderTags();
+                };
+
+                tag.appendChild(upBtn);
+                tag.appendChild(downBtn);
+                tag.appendChild(removeBtn);
+                container.appendChild(tag);
+            });
+        }
+
+    </script>
+
+    <style>
+        .sortable-ghost {
+            opacity: 0.4;
+        }
+
+    </style>
+
+    <!-- Include Tagify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@yaireo/tagify/dist/tagify.css" />
+
+    <!-- Include Tagify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@@yaireo/tagify"></script>
+
+    <script>
+        var selectionProcessList = [
+            "Aptitude Test",
+            "Technical Test",
+            "Technical Interview",
+            "HR Interview",
+            "Assessment Test",
+        ];
+        var branchList = [
+            "Mathematics",
+            "Physics",
+            "Chemistry",
+            "Computer Science",
+            "Biology",
+            "Economics"
+        ];
+        var batchList = [
+            "2023",
+            "2024",
+            "2025",
+            "2026",
+            "2027",
+        ];
+
+        // Initialize Tagify on selectionProcessInput
+        var selepro = document.getElementById('selectionProcessInput');
+        var tagifySelectionProcess = new Tagify(selepro, {
+            whitelist: selectionProcessList,
+            dropdown: {
+                maxItems: 20,
+                enabled: 0,
+                closeOnSelect: false
+            }
+        });
+
+
+        // Initialize Tagify on eligibleCoursesInput
+        var eligibleCoursesInput = document.getElementById('eligibleCoursesInput');
+        var tagifyEligibleCourses = new Tagify(eligibleCoursesInput, {
+            whitelist: branchList,
+            dropdown: {
+                maxItems: 20,
+                enabled: 0,
+                closeOnSelect: false
+            }
+        });
+
+        // Initialize Tagify on batchInput
+        var batchInput = document.getElementById('batchInput');
+        var tagifyBatch = new Tagify(batchInput, {
+            whitelist: batchList,
+            dropdown: {
+                maxItems: 20,
+                enabled: 0,
+                closeOnSelect: false
+            }
+        });
+
+                const deptCoordinators = [
+          { name: "Alice Smith", email: "alice.smith@example.com" },
+          { name: "Bob Johnson", email: "bob.johnson@example.com" },
+          { name: "Carol Davis", email: "carol.davis@example.com" }
+        ];
+
+        const tpoCoordinators = [
+          { name: "David Miller", email: "david.miller@example.com" },
+          { name: "Eva Brown", email: "eva.brown@example.com" }
+        ];
+
+                // Prepare whitelist for DeptCoordinatorNames
+        const deptCoordinatorNames = deptCoordinators.map(c => c.name);
+
+        // Prepare whitelist for TPOCoordinatorNames
+        const tpoCoordinatorNames = tpoCoordinators.map(c => c.name);
+
+        // DeptCoordinatorNames Tagify
+        var deptInput = document.getElementById('DeptCoordinatorNames');
+        var tagifyDept = new Tagify(deptInput, {
+          whitelist: deptCoordinatorNames,
+          dropdown: {
+            maxItems: 10,
+            enabled: 0,
+            closeOnSelect: true
+          }
+        });
+
+        // TPOCoordinatorNames Tagify
+        var tpoInput = document.getElementById('TPOCoordinatorNames');
+        var tagifyTpo = new Tagify(tpoInput, {
+          whitelist: tpoCoordinatorNames,
+          dropdown: {
+            maxItems: 10,
+            enabled: 0,
+            closeOnSelect: true
+          }
+        });
+                tagifyDept.on('change', e => {
+          let selectedTags = e.detail.value;  // JSON string of all tags
+          let emails = [];
+          try {
+            let tags = JSON.parse(selectedTags);
+            tags.forEach(tag => {
+              let found = deptCoordinators.find(c => c.name === tag.value);
+              if (found) emails.push(found.email);
+            });
+          } catch {}
+          document.getElementById('DeptCoordinatorEmails').value = emails.join(', ');
+        });
+
+        tagifyTpo.on('change', e => {
+          let selectedTags = e.detail.value;
+          let emails = [];
+          try {
+            let tags = JSON.parse(selectedTags);
+            tags.forEach(tag => {
+              let found = tpoCoordinators.find(c => c.name === tag.value);
+              if (found) emails.push(found.email);
+            });
+          } catch {}
+          document.getElementById('TPOCoordinatorEmails').value = emails.join(', ');
+        });
+
+
+    </script>
+
+}
