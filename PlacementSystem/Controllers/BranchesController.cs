@@ -22,7 +22,7 @@ namespace PlacementSystem.Controllers
         // GET: Branches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Branch.ToListAsync());
+            return View(await _context.Branches.ToListAsync());
         }
 
         // GET: Branches/Details/5
@@ -33,7 +33,7 @@ namespace PlacementSystem.Controllers
                 return NotFound();
             }
 
-            var branch = await _context.Branch
+            var branch = await _context.Branches
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (branch == null)
             {
@@ -54,7 +54,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BranchName,Specialization,Batch")] Branch branch)
+        public async Task<IActionResult> Create([Bind("Id,BranchName,Specialization,Updated_at,Created_at")] Branch branch)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace PlacementSystem.Controllers
                 return NotFound();
             }
 
-            var branch = await _context.Branch.FindAsync(id);
+            var branch = await _context.Branches.FindAsync(id);
             if (branch == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BranchName,Specialization,Batch")] Branch branch)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BranchName,Specialization,Updated_at,Created_at")] Branch branch)
         {
             if (id != branch.Id)
             {
@@ -124,7 +124,7 @@ namespace PlacementSystem.Controllers
                 return NotFound();
             }
 
-            var branch = await _context.Branch
+            var branch = await _context.Branches
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (branch == null)
             {
@@ -139,10 +139,10 @@ namespace PlacementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var branch = await _context.Branch.FindAsync(id);
+            var branch = await _context.Branches.FindAsync(id);
             if (branch != null)
             {
-                _context.Branch.Remove(branch);
+                _context.Branches.Remove(branch);
             }
 
             await _context.SaveChangesAsync();
@@ -151,7 +151,7 @@ namespace PlacementSystem.Controllers
 
         private bool BranchExists(int id)
         {
-            return _context.Branch.Any(e => e.Id == id);
+            return _context.Branches.Any(e => e.Id == id);
         }
     }
 }

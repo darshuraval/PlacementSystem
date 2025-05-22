@@ -11,10 +11,7 @@ namespace PlacementSystem.Models
         public int Id { get; set; }
 
         // Foreign Key Reference to Company Model
-        public required int CompanyId { get; set; }
-
-        [ForeignKey("CompanyId")]
-        public virtual Company Company { get; set; }
+        public int? CompanyId { get; set; }
 
         public string? ReferenceNumber { get; set; }
 
@@ -23,16 +20,14 @@ namespace PlacementSystem.Models
         public string? JobLocation { get; set; }
 
         public string? CompanyURL { get; set; }
-        public ICollection<SelectionProcess> SelectionProcesses { get; set; } = new List<SelectionProcess>();
 
-
-        public List<string>? SelectionProcess { get; set; }
+        public string? SelectionProcess { get; set; } // e.g., "Online Test, Technical Interview, HR Interview"
 
         public decimal? CTC { get; set; }
 
         public decimal? Stipend { get; set; }
 
-        public string? TraineeType { get; set; }
+        public string? TraineeType { get; set; } // e.g., "Internship", "Full-Time"
 
         public bool? IsBond { get; set; }
 
@@ -42,11 +37,11 @@ namespace PlacementSystem.Models
 
         public string? DateOfJoining { get; set; }
 
-        public string? Batch { get; set; } = "2025";
+        public string? Batch { get; set; } = "2025"; // Default batch
 
-        public string? EligibleCourses { get; set; }
+        public string? EligibleCourses { get; set; } // e.g., "B.Tech, M.Tech, MBA"
 
-        public DateTime? RegistrationDeadline { get; set; }
+        public DateTime? RegistrationDeadline { get; set; } = DateTime.Now.AddDays(3); // Default to 3 days from now
 
         public string? DeptCoordinatorNames { get; set; }
 
@@ -62,12 +57,14 @@ namespace PlacementSystem.Models
 
         public string? Note { get; set; }
 
-        public string? RegistrationLink { get; set; }
+        public string? RegistrationLink { get; set; } 
 
         public string? CompanyProfile { get; set; }
 
         public string? OtherInformation { get; set; }
 
         public string? AttachmentURL { get; set; }
+        public DateTime? Updated_at { get; set; } = DateTime.Now;
+        public DateTime Created_at { get; set; } = DateTime.Now;
     }
 }

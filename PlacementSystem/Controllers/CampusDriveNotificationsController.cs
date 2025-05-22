@@ -22,8 +22,7 @@ namespace PlacementSystem.Controllers
         // GET: CampusDriveNotifications
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.CampusDriveNotification.Include(c => c.Company);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.CampusDriveNotification.ToListAsync());
         }
 
         // GET: CampusDriveNotifications/Details/5
@@ -35,7 +34,6 @@ namespace PlacementSystem.Controllers
             }
 
             var campusDriveNotification = await _context.CampusDriveNotification
-                .Include(c => c.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (campusDriveNotification == null)
             {
@@ -48,25 +46,6 @@ namespace PlacementSystem.Controllers
         // GET: CampusDriveNotifications/Create
         public IActionResult Create()
         {
-            var companies = _context.Set<Company>().ToList();
-            var selectionProcesses = _context.SelectionProcess
-                             .Select(sp => new SelectListItem
-                             {
-                                 Value = sp.ProcessName,
-                                 Text = sp.ProcessName
-                             }).ToList();
-            var branches = _context.Branches.Select(br => new SelectListItem
-            {
-                Value = br.BranchName + " - "+ br.Specialization + ", "+ br.Batch,
-                Text = br.BranchName + " - " + br.Specialization + ", "+ br.Batch,
-            }).ToList();
-
-            ViewBag.SelectionProcessList = selectionProcesses;
-
-
-            ViewData["CompanyId"] = new SelectList(companies, "Id", "Id");
-            ViewData["CompanyName"] = new SelectList(companies, "Id", "CompanyName");
-            ViewBag.CompaniesJson = System.Text.Json.JsonSerializer.Serialize(companies); // For JavaScript
             return View();
         }
 
@@ -75,7 +54,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyId,ReferenceNumber,CompanyName,JobLocation,CompanyURL,SelectionProcess,CTC,Stipend,TraineeType,IsBond,BondDetails,JobProfile,DateOfJoining,Batch,EligibleCourses,RegistrationDeadline,DeptCoordinatorNames,DeptCoordinatorEmails,TPOCoordinatorNames,TPOCoordinatorEmails,Venue,DateAndTime,Note,RegistrationLink,CompanyProfile,OtherInformation,AttachmentURL")] CampusDriveNotification campusDriveNotification)
+        public async Task<IActionResult> Create([Bind("Id,CompanyId,ReferenceNumber,CompanyName,JobLocation,CompanyURL,SelectionProcess,CTC,Stipend,TraineeType,IsBond,BondDetails,JobProfile,DateOfJoining,Batch,EligibleCourses,RegistrationDeadline,DeptCoordinatorNames,DeptCoordinatorEmails,TPOCoordinatorNames,TPOCoordinatorEmails,Venue,DateAndTime,Note,RegistrationLink,CompanyProfile,OtherInformation,AttachmentURL,Updated_at,Created_at")] CampusDriveNotification campusDriveNotification)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +62,6 @@ namespace PlacementSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Set<Company>(), "Id", "Id", campusDriveNotification.CompanyId);
             return View(campusDriveNotification);
         }
 
@@ -100,7 +78,6 @@ namespace PlacementSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Set<Company>(), "Id", "Id", campusDriveNotification.CompanyId);
             return View(campusDriveNotification);
         }
 
@@ -109,7 +86,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyId,ReferenceNumber,CompanyName,JobLocation,CompanyURL,SelectionProcess,CTC,Stipend,TraineeType,IsBond,BondDetails,JobProfile,DateOfJoining,Batch,EligibleCourses,RegistrationDeadline,DeptCoordinatorNames,DeptCoordinatorEmails,TPOCoordinatorNames,TPOCoordinatorEmails,Venue,DateAndTime,Note,RegistrationLink,CompanyProfile,OtherInformation,AttachmentURL")] CampusDriveNotification campusDriveNotification)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyId,ReferenceNumber,CompanyName,JobLocation,CompanyURL,SelectionProcess,CTC,Stipend,TraineeType,IsBond,BondDetails,JobProfile,DateOfJoining,Batch,EligibleCourses,RegistrationDeadline,DeptCoordinatorNames,DeptCoordinatorEmails,TPOCoordinatorNames,TPOCoordinatorEmails,Venue,DateAndTime,Note,RegistrationLink,CompanyProfile,OtherInformation,AttachmentURL,Updated_at,Created_at")] CampusDriveNotification campusDriveNotification)
         {
             if (id != campusDriveNotification.Id)
             {
@@ -136,7 +113,6 @@ namespace PlacementSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Set<Company>(), "Id", "Id", campusDriveNotification.CompanyId);
             return View(campusDriveNotification);
         }
 
@@ -149,7 +125,6 @@ namespace PlacementSystem.Controllers
             }
 
             var campusDriveNotification = await _context.CampusDriveNotification
-                .Include(c => c.Company)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (campusDriveNotification == null)
             {

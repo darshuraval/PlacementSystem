@@ -22,21 +22,6 @@ namespace PlacementSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CampusDriveNotificationSelectionProcess", b =>
-                {
-                    b.Property<int>("CampusDriveNotificationsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SelectionProcessesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CampusDriveNotificationsId", "SelectionProcessesId");
-
-                    b.HasIndex("SelectionProcessesId");
-
-                    b.ToTable("CampusDriveNotificationSelectionProcess");
-                });
-
             modelBuilder.Entity("PlacementSystem.Models.Branch", b =>
                 {
                     b.Property<int>("Id")
@@ -45,17 +30,17 @@ namespace PlacementSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Batch")
-                        .IsRequired()
+                    b.Property<string>("BranchName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BranchName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Specialization")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated_at")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -82,7 +67,7 @@ namespace PlacementSystem.Migrations
                     b.Property<decimal?>("CTC")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyName")
@@ -93,6 +78,9 @@ namespace PlacementSystem.Migrations
 
                     b.Property<string>("CompanyURL")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DateAndTime")
                         .HasColumnType("nvarchar(max)");
@@ -133,7 +121,7 @@ namespace PlacementSystem.Migrations
                     b.Property<string>("RegistrationLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.PrimitiveCollection<string>("SelectionProcess")
+                    b.Property<string>("SelectionProcess")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Stipend")
@@ -148,12 +136,13 @@ namespace PlacementSystem.Migrations
                     b.Property<string>("TraineeType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Updated_at")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Venue")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.ToTable("CampusDriveNotification");
                 });
@@ -185,6 +174,12 @@ namespace PlacementSystem.Migrations
                     b.Property<string>("CompanyURL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Updated_at")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Company");
@@ -198,42 +193,54 @@ namespace PlacementSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ProcessName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated_at")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProcessName")
-                        .IsUnique();
 
                     b.ToTable("SelectionProcess");
                 });
 
-            modelBuilder.Entity("CampusDriveNotificationSelectionProcess", b =>
+            modelBuilder.Entity("PlacementSystem.Models.Users", b =>
                 {
-                    b.HasOne("PlacementSystem.Models.CampusDriveNotification", null)
-                        .WithMany()
-                        .HasForeignKey("CampusDriveNotificationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("PlacementSystem.Models.SelectionProcess", null)
-                        .WithMany()
-                        .HasForeignKey("SelectionProcessesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-            modelBuilder.Entity("PlacementSystem.Models.CampusDriveNotification", b =>
-                {
-                    b.HasOne("PlacementSystem.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<DateTime>("Created_at")
+                        .HasColumnType("datetime2");
 
-                    b.Navigation("Company");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsEmailVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

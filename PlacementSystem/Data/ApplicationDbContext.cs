@@ -12,20 +12,8 @@ namespace PlacementSystem.Data
         public DbSet<SelectionProcess> SelectionProcess { get; set; }
         public DbSet<Branch> Branches { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<SelectionProcess>()
-                .HasIndex(sp => sp.ProcessName)
-                .IsUnique();
-
-            modelBuilder.Entity<CampusDriveNotification>()
-                .HasMany(c => c.SelectionProcesses)
-                .WithMany(s => s.CampusDriveNotifications);
-
-
-            base.OnModelCreating(modelBuilder);
-        }
         public DbSet<PlacementSystem.Models.Branch> Branch { get; set; } = default!;
+        public DbSet<PlacementSystem.Models.Users> Users { get; set; } = default!;
 
     }
 }

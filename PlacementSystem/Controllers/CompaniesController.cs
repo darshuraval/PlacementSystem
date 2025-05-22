@@ -54,7 +54,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyName,CompanyURL,CompanyProfile,CompanyHRName,CompanyHRContact,CompanyHREmail")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,CompanyName,CompanyURL,CompanyProfile,CompanyHRName,CompanyHRContact,CompanyHREmail,Updated_at,Created_at")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,CompanyURL,CompanyProfile,CompanyHRName,CompanyHRContact,CompanyHREmail")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,CompanyURL,CompanyProfile,CompanyHRName,CompanyHRContact,CompanyHREmail,Updated_at,Created_at")] Company company)
         {
             if (id != company.Id)
             {

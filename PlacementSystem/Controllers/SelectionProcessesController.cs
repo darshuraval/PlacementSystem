@@ -54,7 +54,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProcessName")] SelectionProcess selectionProcess)
+        public async Task<IActionResult> Create([Bind("Id,ProcessName,Updated_at,Created_at")] SelectionProcess selectionProcess)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace PlacementSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProcessName")] SelectionProcess selectionProcess)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProcessName,Updated_at,Created_at")] SelectionProcess selectionProcess)
         {
             if (id != selectionProcess.Id)
             {

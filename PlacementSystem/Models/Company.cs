@@ -12,5 +12,8 @@ namespace PlacementSystem.Models
         public string? CompanyHRName { get; set; }
         public string? CompanyHRContact { get; set; }
         public string? CompanyHREmail { get; set; }
+
+        public DateTime? Updated_at { get; set; } = DateTime.Now;
+        public DateTime Created_at { get; set; } = DateTime.Now;
     }
 }
